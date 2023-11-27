@@ -1,6 +1,7 @@
 import java.util.Arrays;
 
 public class TicketManager {
+    TicketTimeComparator timeComparator = new TicketTimeComparator();
     Ticket[] tickets = new Ticket[0];
     public TicketRepository repo;
     public TicketManager(TicketRepository repo) {
@@ -20,7 +21,7 @@ public class TicketManager {
     }
 
 
-    public Ticket[] findAll(String from, String to) {
+    public Ticket[] findAll(String from, String to, TicketTimeComparator timeComparator) {
         Ticket[] result = new Ticket[0];
         for (Ticket ticket : repo.getAll()) {
             if (((ticket.getDeparture()).equals(from)) && (ticket.getArrival()).equals(to)) {
@@ -29,7 +30,7 @@ public class TicketManager {
                     tmp[i] = result[i];
                 }
                 tmp[tmp.length - 1] = ticket;
-                Arrays.sort(tmp);
+                Arrays.sort(tmp, timeComparator);
                 result = tmp;
             }
         } return result;
