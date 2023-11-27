@@ -4,6 +4,11 @@ public class Ticket implements Comparable<Ticket> {
     private int price;
     private String departure;
     private String arrival;
+
+    public int getTravelTime() {
+        return travelTime;
+    }
+
     private int travelTime;
 
     public Ticket(int id, int price, String departure, String arrival, int travelTime) {

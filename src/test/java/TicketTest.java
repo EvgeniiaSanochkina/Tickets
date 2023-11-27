@@ -3,12 +3,13 @@ import org.junit.jupiter.api.Test;
 
 public class TicketTest {
 
+    TicketTimeComparator timeComparator = new TicketTimeComparator();
     Ticket ticket1 = new Ticket(1, 7000, "NOVOSIBIRSK", "MOSCOW", 240);
     Ticket ticket2 = new Ticket(2, 10000, "MOSCOW", "BERLIN", 240);
     Ticket ticket3 = new Ticket(3, 25000, "BERLIN", "BEIJING", 480);
     Ticket ticket4 = new Ticket(4, 16000, "BEIJING", "NOVOSIBIRSK", 240);
-    Ticket ticket5 = new Ticket(5, 20000, "MOSCOW", "BERLIN", 240);
-    Ticket ticket6 = new Ticket(6, 15000, "MOSCOW", "BERLIN", 240);
+    Ticket ticket5 = new Ticket(5, 20000, "MOSCOW", "BERLIN", 200);
+    Ticket ticket6 = new Ticket(6, 15000, "MOSCOW", "BERLIN", 220);
 
     TicketRepository repo = new TicketRepository();
     TicketManager manager = new TicketManager(repo);
@@ -35,8 +36,8 @@ public class TicketTest {
         manager.add(ticket4);
         manager.add(ticket5);
         manager.add(ticket6);
-        Ticket[] actual = manager.findAll(from, to);
-        Ticket[] expected = {ticket2, ticket6, ticket5};
+        Ticket[] actual = manager.findAll(from, to, timeComparator);
+        Ticket[] expected = {ticket5, ticket6, ticket2};
         Assertions.assertArrayEquals(expected, actual);
 
     }
